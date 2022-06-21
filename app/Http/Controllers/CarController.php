@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 Use Alert;
 use Illuminate\Http\Request;
 use App\Models\Car;
-
+use Illuminate\Support\Facades\File;
 class CarController extends Controller
 {
     /**
@@ -157,6 +157,11 @@ class CarController extends Controller
     {
         
         $car = Car::find($id);
+        $imgLink = public_path('image//').$car->image; 
+            
+        if(File::exists($imgLink)) {
+            File::delete($imgLink);
+        }
         $car->delete();
             
         
