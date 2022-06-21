@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+Use Alert;
 use Illuminate\Http\Request;
 use App\Models\Car;
 
@@ -155,11 +155,11 @@ class CarController extends Controller
      */
     public function destroy($id)
     {
+        
         $car = Car::find($id);
-
         $car->delete();
-        $car->save();
-
-        return redirect()->route('cars.index')->with('success', 'Bạn đã cập nhật thành công');
+            
+        
+        return redirect()->route('cars.index')->with('success', 'Bạn đã xóa thành công');
     }
 }

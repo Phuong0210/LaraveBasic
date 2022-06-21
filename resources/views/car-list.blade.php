@@ -128,7 +128,11 @@
                     </thead>
                     <tbody>
                         @foreach ($cars as $car)
+                        <form method="post" action="{{ route('cars.destroy',$car->id) }}" >
+                            @csrf
+                            @method('delete')
                         <tr>
+                            
                             <td>{{ $car['id'] }}</td>
                             <td><img src="/image/{{ $car['image'] }}"  class="card-img-top" alt="..." width="100px"></td>
                             <td>{{ $car['description'] }}</td>
@@ -136,10 +140,15 @@
                             <td>{{ $car['produced_on'] }}</td>
                             <td>
                                 <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                <a href="{{ route('cars.edit',$car -> id) }}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a href="{{ route('cars.destroy',$car -> id) }}" class="delete" title="Delete" name="delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                                <a href="{{ route('cars.edit',$car->id) }}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                              <a href=""class="delete" title="Delete" name="delete" data-toggle="tooltip">  <button  type="submit" ><i class="material-icons">&#xE872;</i></button></a>
                             </td>
-                            @endforeach
+                           
+
+                        </tr>
+                    </form>
+                        @endforeach
+                                                </form>
                 </tbody>
             </table>
         </div>

@@ -19,6 +19,11 @@
 </head>
 <body>
     <div class="container">
+      <div class="alert">
+        @if (Session::has ('success'))
+        {{ Session::get('success')}}
+        @endif
+    </div>
       @if ($errors->any())
       <div class="alert alert-danger">
           <ul>
