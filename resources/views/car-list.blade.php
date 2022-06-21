@@ -141,7 +141,9 @@
                             <td>
                                 <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
                                 <a href="{{ route('cars.edit',$car->id) }}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                              <a href=""class="delete" title="Delete" name="delete" data-toggle="tooltip">  <button  type="submit" ><i class="material-icons">&#xE872;</i></button></a>
+            
+                              <a href=""class="delete" title="Delete" name="delete" data-toggle="tooltip">
+                                <button type="submit" onclick="return confirm('Bạn có chắc chắn là muốn xóa sản phẩm này!!?')"><i class="material-icons">&#xE872;</i></button></a>
                             </td>
                            
 
