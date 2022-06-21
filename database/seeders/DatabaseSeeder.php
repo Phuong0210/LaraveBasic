@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         // cong dep trai
+        // \phuong xau xi
     }
 }
