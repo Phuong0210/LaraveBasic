@@ -22,6 +22,6 @@ class CarSeeder extends Seeder
         //     'model' => Str::random(10),
         //     'produced_on' => Carbon::parse('6/8/2022'),
         // ]);
-        Car::factory()->count(3)->create();
+        Car::factory()->count(6)->create();
     }
 }

@@ -38,9 +38,9 @@
         @method('put')
         <div class="form-group">
             <label for="exampleFormControlFile1">Image </label>
-            <img src="/image/{{isset($car)?$car->image:''}}"  alt="">
-            <input type="file" name="image" class="form-control" id="exampleInputEmail1" value="{{isset($image)?$image:''}}">
-
+            <img src="/image/{{isset($car)?$car->image:''}}"  alt="" id="p-img">
+            <input type="file" name="image" class="form-control" id="exampleInputEmail1" value="{{isset($image)?$image:''}}" onchange="changeImage(event)">
+            
           </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Description</label>
@@ -60,6 +60,16 @@
           </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+      <script>
+        const changeImage = (e) => {
+            const preImg = document.getElementById("p-img")
+            const file = e.target.files[0]
+            preImg.src = URL.createObjectURL(file)
+            preImg.onload = () => {
+                URL.revokeObjectURL(preImg.src)
+            }
+        }
+    </script>
       <br>
       <a href="{{ route('cars.index') }}"><button type="submit" class="btn btn-danger">Back to Car-list</button></a>
     </div>

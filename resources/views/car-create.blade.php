@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,53 +13,71 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
-        input{
+        input {
             width: 200px;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-      <div class="alert">
-        @if (Session::has ('success'))
-        {{ Session::get('success')}}
-        @endif
-    </div>
-      @if ($errors->any())
-      <div class="alert alert-danger">
-          <ul>
-              @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-              @endforeach
-          </ul>
-      </div>
-      @endif
-    <form method="post" action="{{ route('cars.store') }}" enctype="multipart/form-data">
-        @csrf
-        <div class="form-group">
-            <label for="exampleFormControlFile1">Image</label>
-            <input type="file" name="image" class="form-control" id="exampleInputEmail1" value="{{isset($image)?$image:''}}">
-
-          </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Description</label>
-          <input type="text" name="description" class="form-control" id="exampleInputPassword1" value="{{isset($b)?$b:''}}" placeholder="Input description">
-
+        <div class="alert">
+            @if (Session::has('success'))
+                {{ Session::get('success') }}
+            @endif
         </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Model</label>
-            <input type="text" name="model" class="form-control" id="exampleInputPassword1" value="{{isset($b)?$b:''}}" placeholder="Input model">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form method="post" action="{{ route('cars.store') }}" enctype="multipart/form-data">
+            @csrf
+            @method('put')
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Image</label>
+                <input type="file" name="image" class="form-control" id="exampleInputEmail1"
+                    value="{{ isset($image) ? $image : '' }}" onchange="changeImage(event)" required>
+                <img src="" alt="" id="p-img" style="width: 10rem">
+            </div>
+            <script>
+                const changeImage = (e) => {
+                    const preImg = document.getElementById("p-img")
+                    const file = e.target.files[0]
+                    preImg.src = URL.createObjectURL(file)
+                    preImg.onload = () => {
+                        URL.revokeObjectURL(preImg.src)
+                    }
+                }
+            </script>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Description</label>
+                <input type="text" name="description" class="form-control" id="exampleInputPassword1"
+                    value="{{ isset($b) ? $b : '' }}" placeholder="Input description">
 
-          </div>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Proceduce_on</label>
-            <input type="date" name="produced_on" class="form-control" id="exampleInputPassword1" value="{{isset($b)?$b:''}}" placeholder="Input produced-on"><br>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Model</label>
+                <input type="text" name="model" class="form-control" id="exampleInputPassword1"
+                    value="{{ isset($b) ? $b : '' }}" placeholder="Input model">
 
-          </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-      <br>
-      <a href="{{ route('cars.index') }}"><button type="submit" class="btn btn-danger">Back to Car-list</button></a>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Proceduce_on</label>
+                <input type="date" name="produced_on" class="form-control" id="exampleInputPassword1"
+                    value="{{ isset($b) ? $b : '' }}" placeholder="Input produced-on"><br>
+
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <br>
+        <a href="{{ route('cars.index') }}"><button type="submit" class="btn btn-danger">Back to
+                Car-list</button></a>
     </div>
 </body>
+
 </html>
