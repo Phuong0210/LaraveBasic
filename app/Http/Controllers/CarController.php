@@ -68,6 +68,7 @@ class CarController extends Controller
         $car->model=$request->model;
         $car->produced_on=$request->produced_on;
         $car->image=$name;
+        $car-> manufacturers_id = $request->manufacturers()->id;
         $car->save();
 
         return redirect()->route('cars.index')->with('success', 'Bạn đã thêm mới thành công');
@@ -137,6 +138,7 @@ class CarController extends Controller
         $car->description=$request->description;
         $car->model=$request->model;
         $car->produced_on=$request->produced_on;
+        $car-> manufacturers_id = $request->manufacturers()->id;
        // $car->mf_id=$request->mf_id;
         if($name==''){
             $name=$car->image;

@@ -44,9 +44,9 @@ Route::get('/calculate', function(){
 Route::post('calculate',[CalculateController::class,'Calculator'])->name('calculate.post');
 
 /////////////////////////
-Route::get('car-list', function () {
-    return view('car-list');
-});
+// Route::get('car-list', function () {
+//     return view('car-list');
+// });
 Route::resource('cars',CarController::class);
 /* Routes này tương ứng với 7 routes này:
 1.Route::get('cars', [CarController::class, 'index']);=>name('cars.index')
@@ -57,3 +57,13 @@ Route::resource('cars',CarController::class);
 6.Route::put('cars/{car}', [CarController::class, 'update']);=>name('cars.update')
 7.Route::delete('cars/{car}', [CarController::class, 'destroy']);=>name('cars.destroy')
 */
+Route::get('car-list', function () {
+    //$cars=App\Models\Car::all();
+    // foreach($cars as $car ){
+    //     echo $car->model;
+    //     echo '<br>';
+    //     echo $car->manufacturers()->name;
+    //     echo '<hr>';
+    // }
+    return view('car-list');
+});

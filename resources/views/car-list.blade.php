@@ -99,12 +99,17 @@
 </head>
 <body>
     <div class="container">
+        {{-- @foreach ($cars as $car) 
+    @foreach ($car->Manufacturers as $caritem)
+       echo $caritem->id
+    @endforeach
+ @endforeach --}}
         <div class="alert">
             @if (Session::has ('success'))
             {{ Session::get('success')}}
             @endif
         </div>
-            <div class="table-wrapper">
+           <div class="table-wrapper">
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-8"><h2>Car<b>Details</b></h2></div>
@@ -116,13 +121,14 @@
                
                 <table class="table table-bordered">
                    
-                    <thead>
+                    <thead style="width:300px;">
                         <tr>
                             <th>ID</th>
-                            <th>Image</th>
+                            <th style="width:110px;">Image</th>
                             <th>Description</th>
-                            <th>Model</th>
-                            <th>Produced_on</th>
+                            <th >Model</th>
+                            <th style="width:120px;">Produced_on</th>
+                            <th>Ma_name</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -138,6 +144,7 @@
                             <td>{{ $car['description'] }}</td>
                             <td>{{ $car['model'] }}</td>
                             <td>{{ $car['produced_on'] }}</td>
+                            <td>{{ $car['manufacturers_id'] }}</td>
                             <td>
                                 <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
                                 <a href="{{ route('cars.edit',$car->id) }}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
@@ -153,7 +160,46 @@
                                                 </form>
                 </tbody>
             </table>
-        </div>
+        </div> 
+  
+     {{-- <div class="w-5/6 py-10">
+        @foreach ($cars as $car)
+            <div class="m-auto">
+                        <form action="cars/{{ $car->id }}" class="pt-3" method="POST">
+                            @csrf
+                            @method('delete')
+                            <button 
+                                type="submit"
+                                class="border-b-2 pb-2 border-dotted italic text-red-500">
+                                    Delete &rarr;
+                            </button>
+                        </form>
+                    </div>
+               
+
+                <img 
+                    src="{{ asset('image/'. $car->image) }}"
+                    class="w-40 mb-8 shadow-xl" 
+                />
+                <span 
+                class="uppercase text-blue-500 font-bold text-xs italic">
+                    model: {{ $car->model}}
+                </span>
+
+                <h2 class="text-gray-700 text-5xl hover:text-gray-500">
+                    <a href="/cars/{{ $car->id }}">
+                        {{ $car->name }}
+                    </a>
+                </h2>
+
+                <p class="text-lg text-gray-700 py-6">
+                    {{ $car->description }}
+                </p>
+
+                <hr class="mt-4 mb-8">
+            </div>
+        @endforeach
+    </div> --}} 
      </div>       
     </body>
 </html>

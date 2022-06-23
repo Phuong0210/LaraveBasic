@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\QueryException;
+
 return new class extends Migration
 {
     /**
@@ -15,8 +16,13 @@ return new class extends Migration
     {
         Schema::create('manufacturers', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('car_id');
             $table->string('name');
             $table->timestamps();
+            $table->foreign('car_id')
+            ->references('id')
+            ->on('cars')
+            ->onDelete('cascade');
         });
     }
 
