@@ -35,9 +35,9 @@
                 </ul>
             </div>
         @endif
-        <form method="post" action="{{ route('cars.store') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('cars.store') }}"  enctype="multipart/form-data">
             @csrf
-            @method('put')
+            
             <div class="form-group">
                 <label for="exampleFormControlFile1">Image</label>
                 <input type="file" name="image" class="form-control" id="exampleInputEmail1"
@@ -64,6 +64,17 @@
                 <label for="exampleInputEmail1">Model</label>
                 <input type="text" name="model" class="form-control" id="exampleInputPassword1"
                     value="{{ isset($b) ? $b : '' }}" placeholder="Input model">
+
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1" id="manu">Manufacturers</label>
+                        <select id="cars" name="name">
+                            @foreach ($list as $car_item)
+                                
+                       
+                        <option value="{{$car_item->id}}">{{$car_item->name}}</option>
+                        @endforeach
+                        </select>
 
             </div>
             <div class="form-group">

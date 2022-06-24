@@ -15,12 +15,19 @@ return new class extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('manufaturers_id');
             $table->string('description');
             $table->string('model');
             $table->string('image');
             $table->date('produced_on');
-            $table->integer('manufacturers_id');
             $table->timestamps();
+            $table->foreign('manufaturers_id')
+            ->references('id')
+            ->on('manufacturers')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+            
+
         });
     }
 

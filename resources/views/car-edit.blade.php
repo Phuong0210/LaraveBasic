@@ -54,6 +54,16 @@
 
           </div>
           <div class="form-group">
+            <label for="exampleInputEmail1" id="manu">Manufacturers</label>
+                    <select id="cars" name="name">
+                        @foreach ($list as $car_item)
+                            
+                    <option value="{{$car_item->id}}">{{$car_item->name}}</option>
+                    @endforeach
+                    </select>
+
+        </div>
+          <div class="form-group">
             <label for="exampleInputEmail1">Proceduce_on</label>
             <input value="{{isset($car)?$car->produced_on:''}}" type="date" name="produced_on" class="form-control" id="exampleInputPassword1" value="{{isset($b)?$b:''}}" placeholder="Input produced-on"><br>
 

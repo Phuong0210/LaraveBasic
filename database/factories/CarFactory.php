@@ -21,7 +21,8 @@ class CarFactory extends Factory
             'model' => $this->faker->name(),
             'image' => '' .rand(1,3).'.jpg',
             'produced_on' => now(),
-            'manufacturers_id' =>1,
+            'manufaturers_id' => ''.rand(1,8),
+
         ];
     }
 }

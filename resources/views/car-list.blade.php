@@ -144,7 +144,7 @@
                             <td>{{ $car['description'] }}</td>
                             <td>{{ $car['model'] }}</td>
                             <td>{{ $car['produced_on'] }}</td>
-                            <td>{{ $car['manufacturers_id'] }}</td>
+                            <td>{{ $car->manufacturer->name}}</td>
                             <td>
                                 <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
                                 <a href="{{ route('cars.edit',$car->id) }}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
