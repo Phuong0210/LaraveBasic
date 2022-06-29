@@ -14,8 +14,15 @@ class CarController extends Controller
      */
     public function index()
     {
+        // $cars=Car::all();
+        // return $cars;
         $cars=Car::all();
-        return $cars;
+        if(count($cars) > 0) {
+            return response()->json(["status" =>200, "success" => true, "count" => count($cars), "data" => $cars]);
+        }
+        else {
+            return response()->json(["status" => "failed", "success" => false, "message" => "Whoops! no record found"]);
+        }
     }
 
     /**
