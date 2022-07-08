@@ -72,6 +72,12 @@ class CarController extends Controller
         $car ->manufaturers_id = $request ->name;
         $car->image=$name;
         $car->save();
+        if($car) {            
+            return response()->json(["status" => $this->status, "success" => true, "message" => "car record created successfully", "data" => $car]);
+        }    
+    else {
+            return response()->json(["status" => "failed", "success" => false, "message" => "Whoops! failed to create."]);
+    }
 
         return redirect()->route('cars.index')->with('success', 'Bạn đã thêm mới thành công');
     }

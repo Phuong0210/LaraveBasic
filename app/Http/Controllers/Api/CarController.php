@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 use App\Models\Car;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class CarController extends Controller
 {
@@ -33,8 +35,49 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        {
+            $validation = Validator::make($request->all(),
+            [
+                'description'=>'required', 
+            'model'=>'required',
+                // 'name'=>'required',
+                'produced_on'=>'required|date',
+                'image'=>'mimes:jpeg,jpg,png,gif|max:10000'
+            ]);
+    
+            if ($validation->fails()){
+                $response=array('status'=>'error','errors'=>$validation->errors()->toArray()); 
+                return response()->json($response);
+            }
+        //nếu dùng $this->validate() thì lấy về lỗi: $errors = $validate->errors();
+    
+            //kiểm tra file tồn tại
+            $name='';
+            
+            if($request->hasfile('image'))
+            {
+                $file = $request->file('image');
+                $name=time().'_'.$file->getClientOriginalName();
+                $destinationPath=public_path('image'); //project\public\car, //public_path(): trả về đường dẫn tới thư mục public
+                $file->move($destinationPath, $name); //lưu hình ảnh vào thư mục public/images/cars
+            } 
+         
+            $car= new Car();
+            $car->description=$request->description;
+            $car->model=$request->model;
+            // $car -> name = $request->name;
+            $car -> image = $name;
+            $car -> produced_on = $request->produced_on;
+            $car->save();
+            if($car) {            
+                    return response()->json(["status" => "200", "success" => true, "message" => "car record created successfully", "data" => $car]);
+                }    
+            else {
+                    return response()->json(["status" => "failed", "success" => false, "message" => "Whoops! failed to create."]);
+            }
+
+    }}
+    
 
     /**
      * Display the specified resource.
